@@ -1,2 +1,2 @@
 # GodotDialogueSystem
- JSON Dialogue System for Godot 4.
+ Dialogue System for Godot 4 utilizing JSON files as dialogues. 
