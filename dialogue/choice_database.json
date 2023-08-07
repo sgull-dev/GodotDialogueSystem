@@ -1,0 +1,9 @@
+[
+	{
+		"choice_name": "choice_strawberries",
+		"choice_1": "Yes",
+		"choice_2": "Nah, not really",
+		"choice_1_signal": "yes",
+		"choice_2_signal": "no"
+	}
+]

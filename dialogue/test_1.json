@@ -1,0 +1,18 @@
+[
+	{
+		"cam": "1",
+		"name": "",
+		"text": "Wind blows through the valley."
+	},
+	{
+		"cam": "1",
+		"name": "Test NPC",
+		"text": "I'm a test robot."
+	},
+	{
+		"cam": "1",
+		"name": "Test NPC",
+		"text": "Do you like strawberries?",
+		"choice": "choice_strawberries"
+	}
+]

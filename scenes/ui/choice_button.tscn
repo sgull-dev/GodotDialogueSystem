@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7q0ajbuqbdk1"]
+
+[ext_resource type="Script" path="res://scripts/npc/choice_button.gd" id="1_3huem"]
+
+[node name="ChoiceButton" type="Button"]
+text = "Choice"
+script = ExtResource("1_3huem")
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
