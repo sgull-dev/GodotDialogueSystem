@@ -1,18 +1,22 @@
 [
 	{
-		"cam": "1",
-		"name": "",
-		"text": "Wind blows through the valley."
-	},
-	{
-		"cam": "1",
 		"name": "Test NPC",
-		"text": "I'm a test robot."
+		"text": "I'm a test robot.",
+		"portrait_left": "knight_1_placeholder",
+		"portrait_left_effect": "effect_appear_from_left"
 	},
 	{
-		"cam": "1",
+		"name": "Goblin",
+		"text": "Well good day to you, sir.",
+		"portrait_right": "goblin_1_placeholder",
+		"portrait_right_effect": "effect_appear_from_right",
+		"portrait_left_effect": "effect_dim"
+	},
+	{
 		"name": "Test NPC",
 		"text": "Do you like strawberries?",
-		"choice": "choice_strawberries"
+		"choice": "choice_strawberries",
+		"portrait_right_effect": "effect_dim",
+		"portrait_left_effect": "effect_lighten"
 	}
 ]

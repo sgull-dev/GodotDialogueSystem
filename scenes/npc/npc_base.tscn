@@ -372,6 +372,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SlotLeft" type="TextureRect" parent="UI/Portraits"]
+custom_minimum_size = Vector2(2048, 2048)
 layout_mode = 1
 offset_left = -237.0
 offset_right = 1811.0
@@ -384,12 +385,13 @@ libraries = {
 }
 
 [node name="SlotMiddle" type="TextureRect" parent="UI/Portraits"]
+custom_minimum_size = Vector2(2048, 2048)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 243.0
-offset_right = 2291.0
+offset_left = -717.0
+offset_right = 1331.0
 offset_bottom = 2048.0
 grow_horizontal = 2
 scale = Vector2(0.705, 0.705)
@@ -404,8 +406,8 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 780.0
-offset_right = 2828.0
+offset_left = -1140.0
+offset_right = 908.0
 offset_bottom = 2048.0
 grow_horizontal = 0
 scale = Vector2(0.705, 0.705)

@@ -24,6 +24,7 @@ func reset_portrait_slots():
 	while i < slots.size():
 		slots[i].texture = null
 		slots[i].modulate = Color(1,1,1,1)
+		#slots[i].get_node("AnimationPlayer").play("RESET")
 		slot_modes[i] = PORTRAIT_MODE.NORMAL
 		i += 1
 	#clear background
@@ -137,6 +138,7 @@ func appear_from_right(slot):
 		slot_modes[slot] = PORTRAIT_MODE.NORMAL
 
 func appear_from_left(slot):
+	print("Playing Portrait Effect Appear From Left in slot: "+str(slot))
 	slot_modes[slot] = PORTRAIT_MODE.APPEARING
 	var orig_x_pos = slots[slot].position.x
 	var offset = -appear_offset

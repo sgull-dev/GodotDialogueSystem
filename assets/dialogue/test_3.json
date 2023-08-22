@@ -1,7 +1,7 @@
 [
 	{
-		"cam": "1",
 		"name": "Test NPC",
-		"text": "Then, you are my mortal enemy."
+		"text": "Then, you are my mortal enemy.",
+		"background_effect": "effect_flash"
 	}
 ]
