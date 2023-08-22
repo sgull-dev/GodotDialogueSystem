@@ -7,8 +7,10 @@ Write the dialouges to JSON and choices under choice_database. Then reference th
 
 "portrait_left"
 "portrait_left_effect"
-Parameters for portrait slots. Can be used for left, middle and right slots. Set portrait value with "string_name.png" and the corresponding image to res://assets/ui/portraits. 
+
+Parameters for portrait slots. Can be used for left, middle and right slots. Set portrait value with "string_name" and the corresponding image to res://assets/ui/portraits. 
 Possible effects:
+
 "effect_appear_from_left"
 "effect_appear_from_right"
 "effect_dim"
@@ -17,7 +19,9 @@ Possible effects:
 "effect_go_down"
 
 Background can be set with
+
 "background" 
 "background_effect"
+
 Bg Effects:
 "effect_flash"
