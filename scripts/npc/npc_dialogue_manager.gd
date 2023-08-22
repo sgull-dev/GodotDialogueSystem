@@ -8,10 +8,9 @@ var dialogue_playing := false
 @onready var dialogue_picker = $"../DialoguePicker"
 @onready var dialogue_player = $"../DialoguePlayer"
 
-func _process(_delta):
-	#handle interacting with NPC/starting the dialogue
+func _input(event):
 	if can_interact:
-		if !dialogue_playing and Input.is_action_just_pressed("interact"):
+		if !dialogue_playing and event.is_action_pressed("interact"):
 			play_dialogue()
 
 #start dialogue

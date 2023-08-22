@@ -1,24 +1,33 @@
-[gd_scene load_steps=3 format=3 uid="uid://knm87ps21wgh"]
+[gd_scene load_steps=5 format=3 uid="uid://knm87ps21wgh"]
 
 [ext_resource type="Script" path="res://scripts/player/player_move.gd" id="1_6i1ax"]
+[ext_resource type="Script" path="res://scripts/player/player_anim.gd" id="2_86d6x"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sjo84"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_knc3r"]
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 8
 script = ExtResource("1_6i1ax")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="Model" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-size = Vector3(1, 2, 1)
+size = Vector3(0.74, 2, 0.76)
+script = ExtResource("2_86d6x")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.940363, -0.516673)
+size = Vector3(0.3, 0.3, 0.7)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_sjo84")
 
-[node name="CamHolder" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.875026, 0.484077, 0, -0.484077, 0.875026, 0, 2.34897, 0)
-
-[node name="Camera3D" type="Camera3D" parent="CamHolder"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.46274)
-current = true
+[node name="GroundCast" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.868185, 0)
+shape = SubResource("SphereShape3D_knc3r")
+target_position = Vector3(0, -0.52, 0)

@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bnk3c0e46e10e"]
+[gd_scene load_steps=8 format=3 uid="uid://bnk3c0e46e10e"]
 
 [ext_resource type="Script" path="res://scripts/game/stage.gd" id="1_twi40"]
 [ext_resource type="PackedScene" uid="uid://cqticnm25tvif" path="res://scenes/npc/npc.tscn" id="2_l6eag"]
+[ext_resource type="PackedScene" uid="uid://fkscual6i3am" path="res://scenes/camera/topdown_camera.tscn" id="3_6uxo1"]
 [ext_resource type="PackedScene" uid="uid://knm87ps21wgh" path="res://scenes/player/player.tscn" id="3_t4qdm"]
+
+[sub_resource type="Environment" id="Environment_wuai5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o8pjv"]
 albedo_color = Color(0.65098, 0.65098, 0.65098, 1)
@@ -10,25 +13,11 @@ albedo_color = Color(0.65098, 0.65098, 0.65098, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_mh6tc"]
 size = Vector3(100, 1, 100)
 
-[sub_resource type="Environment" id="Environment_wuai5"]
-
 [node name="Stage Test" type="Node3D"]
 script = ExtResource("1_twi40")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-size = Vector3(100, 1, 100)
-material = SubResource("StandardMaterial3D_o8pjv")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="CSGBox3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox3D/StaticBody3D"]
-shape = SubResource("BoxShape3D_mh6tc")
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wuai5")
-
-[node name="NPC" parent="." instance=ExtResource("2_l6eag")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5376, 0.5, 12.9965)
 
 [node name="Player" parent="." instance=ExtResource("3_t4qdm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.905273, 0.5, 14.0378)
@@ -36,3 +25,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.905273, 0.5, 14.0378)
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.813497, 2.54212e-08, -0.581569, 0.581569, -3.55591e-08, 0.813497, 0, -1, -4.37114e-08, 0, 4.82118, 0)
 shadow_enabled = true
+
+[node name="TopdownCamera" parent="." instance=ExtResource("3_6uxo1")]
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Floor" type="CSGBox3D" parent="Environment"]
+size = Vector3(100, 1, 100)
+material = SubResource("StandardMaterial3D_o8pjv")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Floor/StaticBody3D"]
+shape = SubResource("BoxShape3D_mh6tc")
+
+[node name="NPCs" type="Node3D" parent="."]
+
+[node name="NPC" parent="NPCs" instance=ExtResource("2_l6eag")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.53762, 0.5, 12.9965)
