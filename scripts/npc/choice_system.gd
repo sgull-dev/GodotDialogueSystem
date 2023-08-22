@@ -34,10 +34,23 @@ func load_choice(choice_name):
 		else:
 			assigning = false
 		i += 1
+	#wait one frame so older choice buttons have been flushed away
+	await get_tree().process_frame
 	#handle visiblity and info to other nodes and mouse 
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	ui.visible = true
 	dialogue_player.choice_in_process = true
+	ui.get_child(0).grab_focus()
+	#assign focus neighbors to choice buttons
+	if ui.get_child_count() > 1:
+		ui.get_child(0).focus_neighbor_bottom = NodePath("../" + str(ui.get_child(1).name))
+		var u = 1
+		while u < ui.get_child_count()-1:
+			ui.get_child(u).focus_neighbor_top = NodePath("../" + str(ui.get_child(u-1).name))
+			ui.get_child(u).focus_neighbor_bottom = NodePath("../" + str(ui.get_child(u+1).name))
+			u += 1
+		ui.get_child(u).focus_neighbor_top = NodePath("../" + str(ui.get_child(u-1).name))
+	
 
 func close_menu():
 	ui.visible = false

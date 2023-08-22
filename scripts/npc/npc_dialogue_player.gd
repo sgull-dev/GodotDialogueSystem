@@ -13,10 +13,13 @@ var choice_on_next_line := false
 #what choice is currently enabled
 var choice_name : String
 
+@onready var ui = $"../UI"
+@onready var text_panel = $"../UI/DialoguePanel"
 @onready var text_box = $"../UI/DialogueContainer/DialogueLabel"
 @onready var name_box = $"../UI/DialogueContainer/NameLabel"
 @onready var dialogue_manager = $"../DialogueManager"
 @onready var choice_manager = $"../ChoiceManager"
+@onready var portrait_manager = $"../PortraitsManager"
 
 #handle receiving inputs and dealing with them based on current dialogue state
 func _process(_delta):
@@ -36,6 +39,7 @@ func _process(_delta):
 
 #start dialogue
 func start(path):
+	#text_box.grab_focus()
 	#reset line index
 	index = 0
 	#check if dialogue exists at path
@@ -45,15 +49,14 @@ func start(path):
 		#start typewrting first line with correct name
 		typewrite(dialogue[index]['text'])
 		name_box.text = dialogue[index]["name"]
+		#handle portraits
+		handle_portraits()
 		#toggle UI visible
-		text_box.visible = true
-		name_box.visible = true
+		ui.visible = true
 		#set state vars
 		dialogue_playing = true
 		choice_on_next_line = false
 		choice_in_process = false
-		#handle camera
-		switch_camera()
 		
 		#check if there is a choice on current line
 		if "choice" in dialogue[index]:
@@ -81,7 +84,9 @@ func advance_dialogue():
 		#text_box.text = dialogue[index]['text']
 		typewrite(dialogue[index]['text'])
 		name_box.text = dialogue[index]['name']
-		switch_camera()
+		#handle portraits
+		handle_portraits()
+		
 		if "choice" in dialogue[index]:
 			choice_on_next_line = true
 			choice_name = dialogue[index].choice
@@ -115,38 +120,53 @@ func typewrite(line):
 
 #stop the dialogue
 func stop():
-	#put camera back to normal
-	clear_cameras()
-	GameData.get_current_stage().get_node("Player/CamHolder/Camera3D").make_current()
 	#stop dialogue playing
 	dialogue_playing = false
 	#toggle hud not visible
-	text_box.visible = false
-	name_box.visible = false
+	ui.visible = false
 	#stop the dialogue in manager
 	dialogue_manager.stop_dialogue()
-
-func clear_cameras():
-	#clear player camera
-	GameData.get_current_stage().get_node("Player/CamHolder/Camera3D").clear_current(false)
-	#clear dialogue cameras
-	var i = 1
-	while i < get_child_count():
-		var c = "Camera" + str(i)
-		get_node(c).clear_current(false)
-		i += 1
-
-func switch_camera():
-	var cam_index = int(dialogue[index]['cam'])
-	if cam_index == 0:
-		clear_cameras()
-		GameData.get_current_stage().get_node("Player/CamHolder/Camera3D").make_current()
-	else:
-		clear_cameras()
-		var c = "Camera" + str(cam_index)
-		get_node(c).make_current()
 
 func switch_to_choice():
 	choice_manager.load_choice(choice_name)
 	choice_on_next_line = false
 	choice_name = ""
+
+func handle_portraits():
+	#handle setting portrait textures
+	if dialogue[index].has("portrait_right"):
+		if dialogue[index]["portrait_right"] == "null":
+			portrait_manager.clear_portrait(2)
+		else:
+			var texture_path = "res://assets/ui/portraits/" + dialogue[index]["portrait_right"] + ".png"
+			portrait_manager.set_portrait_to_slot(2, texture_path)
+		
+	if dialogue[index].has("portrait_middle"):
+		if dialogue[index]["portrait_middle"] == "null":
+			portrait_manager.clear_portrait(1)
+		else:
+			var texture_path = "res://assets/ui/portraits/" + dialogue[index]["portrait_middle"] + ".png"
+			portrait_manager.set_portrait_to_slot(1, texture_path)
+	
+	if dialogue[index].has("portrait_left"):
+		if dialogue[index]["portrait_left"] == "null":
+			portrait_manager.clear_portrait(0)
+		else:
+			var texture_path = "res://assets/ui/portraits/" + dialogue[index]["portrait_left"] + ".png"
+			portrait_manager.set_portrait_to_slot(0, texture_path)
+	#handle setting portrait effects
+	if dialogue[index].has("portrait_right_effect"):
+		portrait_manager.play_effect(2, dialogue[index]["portrait_right_effect"])
+	if dialogue[index].has("portrait_middle_effect"):
+		portrait_manager.play_effect(1, dialogue[index]["portrait_middle_effect"])
+	if dialogue[index].has("portrait_left_effect"):
+		portrait_manager.play_effect(0, dialogue[index]["portrait_left_effect"])
+	#handle setting background
+	if dialogue[index].has("background"):
+		if dialogue[index]["background"] == "null":
+			portrait_manager.set_background()
+		else:
+			var texture_path = "res://assets/ui/backgrounds/" + dialogue[index]["background"] + ".png"
+			portrait_manager.set_background(texture_path)
+	if dialogue[index].has("background_effect"):
+		portrait_manager.play_background_effect(dialogue[index]["background_effect"])

@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bpdp8gge048h7"]
+
+[ext_resource type="PackedScene" uid="uid://xpdkbjp6np8x" path="res://scenes/npc/npc_base.tscn" id="1_nnh3x"]
+[ext_resource type="Script" path="res://scripts/npc/dialp_test.gd" id="2_elpw8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_73ger"]
+albedo_color = Color(0.87451, 0.654902, 0.184314, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5bgf8"]
+size = Vector3(1, 2, 1)
+
+[node name="NPC Test" instance=ExtResource("1_nnh3x")]
+collision_layer = 1
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+size = Vector3(1, 2, 1)
+material = SubResource("StandardMaterial3D_73ger")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_5bgf8")
+
+[node name="DialoguePicker" parent="." index="2"]
+script = ExtResource("2_elpw8")
