@@ -1,0 +1,18 @@
+[
+	{
+		"name": "",
+		"text": "The cell was damp, only the rattling of mice could be heard.",
+		"background": "cell"
+	},
+	{
+		"name": "Goblin",
+		"text": "Damn, well I got myself in a pickle...",
+		"portrait_right": "goblin_1_placeholder",
+		"portrait_right_effect": "effect_appear_from_right"
+	},
+	{
+		"name": "",
+		"text": "Suddenly!",
+		"background_effect": "effect_flash"
+	}
+]
